@@ -1,4 +1,7 @@
-package com.muscimol.bio;
+package com.muscimol.bio.creature;
+
+import com.muscimol.bio.Cell;
+import com.muscimol.bio.Thing;
 
 public class Reducent extends Thing {
 

@@ -1,12 +1,16 @@
-package com.muscimol.bio;
+package com.muscimol.bio.creature;
+
+import com.muscimol.bio.Cell;
+import com.muscimol.bio.Map;
+import com.muscimol.bio.Thing;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Consument_4 extends Thing {
+public class Consument_3 extends Thing {
 
-    public Consument_4(int max_satiety) {
+    public Consument_3(int max_satiety) {
         this.max_satiety = max_satiety;
         satiety = max_satiety;
         active = true;
@@ -62,7 +66,7 @@ public class Consument_4 extends Thing {
 
         for (Cell c : near) {
             if(c.getThing()!=null&&
-                    (c.getThing() instanceof Consument_2||c.getThing() instanceof Consument_3)
+                    (c.getThing() instanceof Consument_2||c.getThing() instanceof Consument_1)
             ){
                 good.add(c);
             }
@@ -92,10 +96,10 @@ public class Consument_4 extends Thing {
                         e.printStackTrace();
                     }
                 }
-                if(thing instanceof Consument_3){
+                if(thing instanceof Consument_1){
                     try{
-                        Consument_3 consument_3 = (Consument_3) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
-                        if (consument_3.isEaten()) {
+                        Consument_1 consument_1 = (Consument_1) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
+                        if (consument_1.isEaten()) {
                             if (satiety < max_satiety) {
                                 satiety++;
 
@@ -204,4 +208,5 @@ public class Consument_4 extends Thing {
         return false;
 
     }
+
 }

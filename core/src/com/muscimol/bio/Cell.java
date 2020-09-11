@@ -1,5 +1,12 @@
 package com.muscimol.bio;
 
+import com.muscimol.bio.creature.Consument_1;
+import com.muscimol.bio.creature.Consument_2;
+import com.muscimol.bio.creature.Consument_3;
+import com.muscimol.bio.creature.Consument_4;
+import com.muscimol.bio.creature.Producent;
+import com.muscimol.bio.creature.Reducent;
+
 public class Cell {
 
     private int x;
@@ -21,8 +28,8 @@ public class Cell {
     }
 
     public void action(){
-        if(thing.is_active()){
-            thing.action();
+        if(thing.isActive()){
+            thing.action(this);
         }else{
             clean();
         }
@@ -43,7 +50,7 @@ public class Cell {
         if(thing instanceof Consument_1
                 ||thing instanceof Consument_2
                 ||thing instanceof Consument_3
-                ||thing instanceof  Consument_4){
+                ||thing instanceof Consument_4){
             reducent_available = true;
         }
 
@@ -53,23 +60,18 @@ public class Cell {
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }
-
     public boolean isReducent_available() {
         return reducent_available;
     }
-
     public boolean isProducent_available() {
         return producent_available;
     }
-
     public Thing getThing() {
         return thing;
     }
-
     public synchronized void setThing(Thing thing) {
         this.thing = thing;
     }

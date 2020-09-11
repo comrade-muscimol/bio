@@ -43,4 +43,7 @@ public class Map {
 
         return out;
     }
+    public synchronized void action(){
+
+    }
 }

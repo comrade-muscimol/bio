@@ -1,12 +1,15 @@
-package com.muscimol.bio;
+package com.muscimol.bio.creature;
+
+import com.muscimol.bio.Cell;
+import com.muscimol.bio.Map;
+import com.muscimol.bio.Thing;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Consument_3 extends Thing {
-
-    public Consument_3(int max_satiety) {
+public class Consument_2 extends Thing {
+    public Consument_2(int max_satiety) {
         this.max_satiety = max_satiety;
         satiety = max_satiety;
         active = true;
@@ -62,7 +65,7 @@ public class Consument_3 extends Thing {
 
         for (Cell c : near) {
             if(c.getThing()!=null&&
-                    (c.getThing() instanceof Consument_2||c.getThing() instanceof Consument_1)
+                    (c.getThing() instanceof Producent||c.getThing() instanceof Consument_1)
             ){
                 good.add(c);
             }
@@ -75,10 +78,10 @@ public class Consument_3 extends Thing {
 
                 Thing thing = Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
 
-                if(thing instanceof Consument_2){
+                if(thing instanceof Producent){
                     try{
-                        Consument_2 consument_2 = (Consument_2) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
-                        if (consument_2.isEaten()) {
+                        Producent producent = (Producent) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
+                        if (producent.isEaten()) {
                             if (satiety < max_satiety) {
                                 satiety++;
 
@@ -131,7 +134,7 @@ public class Consument_3 extends Thing {
                 good.add(c);
             }
         }
-
+        
         boolean exit = false;
         do{
 
@@ -204,5 +207,4 @@ public class Consument_3 extends Thing {
         return false;
 
     }
-
 }
