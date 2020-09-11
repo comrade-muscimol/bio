@@ -1,12 +1,17 @@
 package com.muscimol.bio;
 
-public class Reducent implements Thing {
+public class Reducent extends Thing {
 
     private boolean active;
     private int counter;
 
+    public Reducent(int counter) {
+        this.counter = counter;
+        active = true;
+    }
+
     @Override
-    public void action() {
+    public void action(Cell cell) {
         if(counter>0){
             counter--;
         }else{
@@ -15,7 +20,9 @@ public class Reducent implements Thing {
     }
 
     @Override
-    public boolean is_active() {
-        return active;
+    public boolean isEaten() {
+        return false;
     }
+
+
 }

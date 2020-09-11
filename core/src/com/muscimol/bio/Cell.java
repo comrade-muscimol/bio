@@ -24,14 +24,30 @@ public class Cell {
         if(thing.is_active()){
             thing.action();
         }else{
-
-            // если класс Producent то producent_avaliable = false;
-            // если редуцент, то producent = true, reducent = false;
-            // если консумент, то редуцент = true;
-
-            thing = null;
+            clean();
         }
 
+    }
+    private void clean(){
+        if (thing==null) return;
+
+        if(thing instanceof Producent){
+            producent_available = false;
+        }
+
+        if (thing instanceof Reducent){
+            producent_available = true;
+            reducent_available = false;
+        }
+
+        if(thing instanceof Consument_1
+                ||thing instanceof Consument_2
+                ||thing instanceof Consument_3
+                ||thing instanceof  Consument_4){
+            reducent_available = true;
+        }
+
+        thing = null;
     }
 
     public int getX() {

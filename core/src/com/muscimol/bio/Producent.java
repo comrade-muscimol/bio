@@ -1,6 +1,7 @@
 package com.muscimol.bio;
 
-public class Producent implements Thing {
+public class Producent extends Thing {
+
 
     boolean active;
 
@@ -8,8 +9,14 @@ public class Producent implements Thing {
     int max_amount;
 
 
+    public Producent(int max_amount) {
+        this.max_amount = max_amount;
+        active = true;
+        amount = 0;
+    }
+
     @Override
-    public void action() {
+    public void action(Cell cell) {
 
         if (!active) return;
         if (amount<=0) {
@@ -22,10 +29,7 @@ public class Producent implements Thing {
     }
 
     @Override
-    public boolean is_active() {
-        return active;
-    }
-    public boolean try_feed(){
+    public boolean isEaten() {
         if (!active) return false;
 
         if(amount>0) {
@@ -35,6 +39,8 @@ public class Producent implements Thing {
             active = false;
             return false;
         }
-
     }
+
+
+
 }

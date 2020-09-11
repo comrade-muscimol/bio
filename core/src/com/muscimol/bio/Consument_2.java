@@ -4,96 +4,120 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Consument_2 implements Thing {
+public class Consument_2 extends Thing {
+    public Consument_2(int max_satiety) {
+        this.max_satiety = max_satiety;
+        satiety = max_satiety;
+        active = true;
+    }
+
     private boolean active;
 
     private int satiety;
     private int max_satiety;
 
-    private double producent_priority = 30.2;
-    private double consument_1_priority = 69.8;
-
-
     @Override
-    public void action() {
+    public void action(Cell cell) {
+
+        if(satiety==0){
+            active=false;
+            return;
+        }
+        if(!active) return;
+
+
+        if(tryEat(cell)){
+            tryReproduction(cell);
+        }else{
+            tryMove(cell);
+        }
+
+
+        if(satiety==0){
+            active=false;
+            return;
+        }
+        if(!active) return;
+
 
     }
 
     @Override
-    public boolean is_active() {
-        return false;
-    }
-
-    public boolean is_eaten(){
+    public boolean isEaten() {
         if(!active) return false;
         else {
             active = false;
             return true;
         }
     }
-    public void try_feed(Cell cell) {
+
+    private boolean tryEat(Cell cell) {
         int x = cell.getX();
         int y = cell.getY();
 
         List<Cell> near = Map.getInstance().getNear(x, y);
-
         List<Cell> good = new ArrayList<>();
 
 
         for (Cell c : near) {
-            //если c продуцент или консумент 1 добавить к good
+            if(c.getThing()!=null&&
+                    (c.getThing() instanceof Producent||c.getThing() instanceof Consument_1)
+            ){
+                good.add(c);
+            }
         }
 
         boolean exit = false;
         do {
-
             if (!good.isEmpty()) {
                 Collections.shuffle(good);
 
-                try {
-                    //если продуцент
-                    Producent producent = (Producent) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
-                    if (producent.try_feed()) {
-                        if (satiety < max_satiety) {
-                            satiety++;
+                Thing thing = Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
 
-                            if (satiety == max_satiety) {
-                                try_to_reproduction(cell);
+                if(thing instanceof Producent){
+                    try{
+                        Producent producent = (Producent) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
+                        if (producent.isEaten()) {
+                            if (satiety < max_satiety) {
+                                satiety++;
+
+                                return true;
                             }
-                            exit = true;
+                        } else {
+                            good.remove(0);
                         }
-                    } else {
-                        good.remove(0);
                     }
-                    // если консумент 1
-                    Consument_1 consument_1 = (Consument_1) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
-                    if (consument_1.is_eaten()) {
-                        if (satiety < max_satiety) {
-                            satiety++;
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                if(thing instanceof Consument_1){
+                    try{
+                        Consument_1 consument_1 = (Consument_1) Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).getThing();
+                        if (consument_1.isEaten()) {
+                            if (satiety < max_satiety) {
+                                satiety++;
 
-                            if (satiety == max_satiety) {
-                                try_to_reproduction(cell);
+                                return true;
                             }
-                            exit = true;
+                        } else {
+                            good.remove(0);
                         }
-                    } else {
-                        good.remove(0);
                     }
-
-
-                } catch (Exception ee) {
-                    ee.printStackTrace();
-
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }else{
                 exit=true;
             }
         }
-        while (!exit) ;
+        while (!exit);
+
+        return false;
 
     }
-
-    void try_to_reproduction(Cell cell){
+    private boolean tryReproduction(Cell cell){
         int x = cell.getX();
         int y = cell.getY();
 
@@ -102,7 +126,9 @@ public class Consument_2 implements Thing {
         List<Cell> good = new ArrayList<>();
 
         for (Cell c : near){
-            //если c пустая клетка
+            if(c.getThing()==null){
+                good.add(c);
+            }
         }
         
         boolean exit = false;
@@ -115,7 +141,7 @@ public class Consument_2 implements Thing {
 
                     Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).setThing((Thing)this.clone());
 
-                    exit = true;
+                    return true;
                 } catch (Exception e) {
                     good.remove(0);
 
@@ -127,6 +153,54 @@ public class Consument_2 implements Thing {
             }
 
         }while(!exit);
+        return false;
+
+    }
+    private boolean tryMove(Cell cell){
+        int x = cell.getX();
+        int y = cell.getY();
+
+        List<Cell> near = Map.getInstance().getNear(x, y);
+        List<Cell> good = new ArrayList<>();
+
+
+        for (Cell c : near) {
+            if(c.getThing()!=null&&
+                    (c.getThing()==null)
+            ){
+                good.add(c);
+            }
+
+        }
+        boolean exit = false;
+
+        do {
+            if (!good.isEmpty()) {
+
+                Collections.shuffle(good);
+
+            }else{
+                exit = true;
+            }
+
+            try {
+                satiety--;
+                if(satiety<=0){
+                    active = false;
+                    return false;
+                }
+                Map.getInstance().get(good.get(0).getX(), good.get(0).getY()).setThing(
+                        Map.getInstance().get(x, y).getThing()
+                );
+
+                Map.getInstance().get(x, y).setThing(null);
+
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }while(!exit);
+        return false;
 
     }
 }

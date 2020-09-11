@@ -18,7 +18,7 @@ public class Map {
         map = new Cell[x][y];
     }
 
-    public Cell get(int x, int y){
+    public synchronized Cell get(int x, int y){
         return map[x][y];
     }
     public synchronized void set(int x, int y, Cell cell) {
