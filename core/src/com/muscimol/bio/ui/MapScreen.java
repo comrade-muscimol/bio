@@ -14,6 +14,10 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.muscimol.bio.generate.Map;
 
 public class MapScreen implements Screen {
+
+    private volatile float map_scroll_percent_x = 0f ;
+    private volatile float map_scroll_percent_y = 0f ;
+
     boolean test = true;
     private long lastUpdated;
 
@@ -45,15 +49,26 @@ public class MapScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        if(test){
-            try {   stage.getRoot().findActor("map").clearListeners();              }catch (Exception e){e.printStackTrace();}
-            try {   stage.getRoot().removeActor(stage.getRoot().findActor("map"));  }catch (Exception e){e.printStackTrace();}
+        if(lastUpdated!=Map.getInstance().getLastUpdateTime()) {
+            //System.out.println("before try:   x:"+map_scroll_percent_x+"-y:"+map_scroll_percent_y);
+            try {
+                ScrollPane temp_pane = (ScrollPane) stage.getRoot().findActor("map_scroll_pane");
 
+                map_scroll_percent_x = temp_pane.getScrollPercentX();
+                map_scroll_percent_y = temp_pane.getScrollPercentY();
 
-            try {   stage.getRoot().addActor(generate_map());                              }catch (Exception e){e.printStackTrace();}
+                stage.getRoot().findActor("map").clearListeners();
+                stage.getRoot().removeActor(stage.getRoot().findActor("map"));
+
+               // System.out.println("after try:   x:"+map_scroll_percent_x+"-y:"+map_scroll_percent_y);
+            }catch (Exception e){
+
+                e.printStackTrace();
+            }
+
+            try {       stage.getRoot().addActor(generate_map());    }catch (Exception e){e.printStackTrace();}
 
             lastUpdated = Map.getInstance().getLastUpdateTime();
-            test = false;
         }
 
         stage.act(delta);
@@ -109,8 +124,24 @@ public class MapScreen implements Screen {
         }
 
         ScrollPane pane = new ScrollPane(table);
-        pane.setScrollingDisabled(true, true);
+
+        pane.setScrollingDisabled(false, false);
         pane.setBounds(0 ,0 ,out.getHeight() , out.getWidth());
+
+        System.out.println("set position to x:"+map_scroll_percent_x+"- y:"+map_scroll_percent_y);
+
+
+        pane.setOverscroll(false, false);
+
+        pane.layout();
+        pane.setScrollPercentX(map_scroll_percent_x);
+        pane.setScrollPercentY(map_scroll_percent_y);
+        pane.updateVisualScroll();
+
+
+        pane.setName("map_scroll_pane");
+
+
         out.addActor(pane);
 
         return out;

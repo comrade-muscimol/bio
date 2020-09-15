@@ -93,6 +93,14 @@ public class Map {
         return out;
     }
     public synchronized void action(){
+        int height = map.size();
+        int width = map.get(0).size();
+
+        for(int i=0; i<height; i++){
+            for(int o = 0; o<width; o++){
+                get(i, o).action();
+            }
+        }
 
         lastUpdated = new Date().getTime();
     }

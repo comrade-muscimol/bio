@@ -42,14 +42,6 @@ public class Consument_1 extends Thing {
             tryMove(cell);
         }
 
-
-        if (satiety == 0) {
-            active = false;
-            return;
-        }
-        if (!active) return;
-
-
     }
 
     @Override

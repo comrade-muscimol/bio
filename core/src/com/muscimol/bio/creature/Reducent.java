@@ -22,6 +22,9 @@ public class Reducent extends Thing {
 
     @Override
     public void action(Cell cell) {
+
+        System.out.println("action cell:");
+
         if(counter>0){
             counter--;
         }else{

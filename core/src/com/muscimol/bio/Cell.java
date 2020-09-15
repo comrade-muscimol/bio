@@ -8,6 +8,8 @@ import com.muscimol.bio.creature.Producent;
 import com.muscimol.bio.creature.Reducent;
 import com.muscimol.bio.creature.Thing;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Cell {
 
     private int x;
@@ -29,10 +31,38 @@ public class Cell {
     }
 
     public void action(){
-        if(thing.isActive()){
-            thing.action(this);
+
+        if(thing!=null){
+            if(thing.isActive()){
+                thing.action(this);
+            }else{
+                clean();
+            }
         }else{
-            clean();
+            if(reducent_available&&producent_available){
+                int random_int = ThreadLocalRandom.current().nextInt(1);
+                switch (random_int){
+                    case 0:
+                        thing = Reducent.createNew();
+                        reducent_available = false;
+                        break;
+                    case 1:
+                        thing = Producent.createNew();
+                        producent_available = false;
+                        break;
+                    default:
+                }
+
+            }
+            else if(reducent_available) {
+                thing = Reducent.createNew();
+                reducent_available = false;
+            }
+            else if(producent_available) {
+                thing = Producent.createNew();
+                producent_available = false;
+            }
+
         }
 
     }
