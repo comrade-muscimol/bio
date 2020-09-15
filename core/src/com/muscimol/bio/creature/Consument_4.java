@@ -2,13 +2,18 @@ package com.muscimol.bio.creature;
 
 import com.muscimol.bio.Cell;
 import com.muscimol.bio.Map;
-import com.muscimol.bio.Thing;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Consument_4 extends Thing {
+
+    public static Consument_4 createNew() {
+        int index = ThreadLocalRandom.current().nextInt(Consuments_4.values().length);
+        return new Consument_4(Consuments_4.values()[index].max_satiety);
+    }
 
     public Consument_4(int max_satiety) {
         this.max_satiety = max_satiety;

@@ -1,11 +1,15 @@
 package com.muscimol.bio.creature;
 
 import com.muscimol.bio.Cell;
-import com.muscimol.bio.Thing;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Producent extends Thing {
 
-
+    public static Producent createNew() {
+        int index = ThreadLocalRandom.current().nextInt(Producents.values().length);
+        return new Producent(Producents.values()[index].max_amount);
+    }
     boolean active;
 
     int amount;
@@ -15,7 +19,7 @@ public class Producent extends Thing {
     public Producent(int max_amount) {
         this.max_amount = max_amount;
         active = true;
-        amount = 0;
+        amount = 1;
     }
 
     @Override

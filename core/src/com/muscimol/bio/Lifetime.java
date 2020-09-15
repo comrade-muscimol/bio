@@ -1,21 +1,34 @@
 package com.muscimol.bio;
 
 public class Lifetime extends Thread {
-    public static Lifetime current;
-    private int mills;
 
-    public Lifetime(int mills){
-        this.mills = mills;
+    public static boolean stopped;
+    public static int mills;
+
+    public static Lifetime current;
+
+
+    public Lifetime(){
+
     }
     @Override
     public void run() {
-        while(!Thread.currentThread().isInterrupted()){
+        while(true){
 
-            Map.getInstance().action();
-            try{
-                Thread.sleep(mills);
-            }catch (Exception e){
-                e.printStackTrace();
+            if(!stopped) {
+                Map.getInstance().action();
+
+                try {
+                    Thread.sleep(mills);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                try {
+                    Thread.sleep(500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }

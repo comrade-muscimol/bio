@@ -1,6 +1,7 @@
 package com.muscimol.bio;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Map {
@@ -12,19 +13,26 @@ public class Map {
     public static void reset(int x, int y){
         instance = new Map(x, y);
     }
-    private Cell[][] map;
+    private List<List<Cell>> map;
 
     public Map(int x, int y){
-        map = new Cell[x][y];
+        map = new LinkedList<>();
+        for (int i = 0; i<x;i++){
+            List<Cell> column = new LinkedList<>();
+            for (int o=0; o<y; o++){
+                column.add(new Cell(i, o));
+            }
+            map.add(column);
+        }
     }
 
     public synchronized Cell get(int x, int y){
-        return map[x][y];
+        return map.get(x).get(y);
     }
     public synchronized void set(int x, int y, Cell cell) {
-        map[x][y] = cell;
+        map.get(x).set(y, cell);
     }
-    public Cell[][] getMap(){
+    public List<List<Cell>> getMap(){
         return map;
     }
     public List<Cell> getNear(int x, int y){
@@ -34,7 +42,7 @@ public class Map {
         for(Directions direction :  Directions.values()){
 
             try{
-                out.add(map[x][y]);
+                out.add(map.get(x+direction.x).get(y+direction.y));
 
             }catch (Exception e){
 

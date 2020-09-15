@@ -6,6 +6,7 @@ import com.muscimol.bio.creature.Consument_3;
 import com.muscimol.bio.creature.Consument_4;
 import com.muscimol.bio.creature.Producent;
 import com.muscimol.bio.creature.Reducent;
+import com.muscimol.bio.creature.Thing;
 
 public class Cell {
 
@@ -21,8 +22,8 @@ public class Cell {
         this.x = x;
         this.y = y;
 
-        reducent_available = true;
-        producent_available = true;
+        reducent_available = false;
+        producent_available = false;
 
         thing = null;
     }
@@ -57,6 +58,17 @@ public class Cell {
         thing = null;
     }
 
+    public boolean isEmpty(){
+        if(
+        thing==null
+        &&
+        !reducent_available
+        &&
+        !producent_available
+        )return true;
+        else return false;
+    }
+
     public int getX() {
         return x;
     }
@@ -74,5 +86,11 @@ public class Cell {
     }
     public synchronized void setThing(Thing thing) {
         this.thing = thing;
+    }
+    public synchronized void setReducent_available(boolean reducent_available) {
+        this.reducent_available = reducent_available;
+    }
+    public synchronized void setProducent_available(boolean producent_available) {
+        this.producent_available = producent_available;
     }
 }

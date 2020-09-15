@@ -1,6 +1,8 @@
-package com.muscimol.bio;
+package com.muscimol.bio.creature;
 
-public abstract class Thing {
+import com.muscimol.bio.Cell;
+
+    public abstract class Thing {
 
     private boolean active;
 
@@ -12,6 +14,8 @@ public abstract class Thing {
     }
 
     public abstract void action(Cell cell);
+
+
 
     public abstract boolean isEaten();
 
