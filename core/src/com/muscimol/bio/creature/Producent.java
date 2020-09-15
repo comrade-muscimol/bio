@@ -8,7 +8,7 @@ public class Producent extends Thing {
 
     public static Producent createNew() {
         int index = ThreadLocalRandom.current().nextInt(Producents.values().length);
-        return new Producent(Producents.values()[index].max_amount);
+        return new Producent(Producents.values()[index].max_amount, Producents.values()[index].image_atlas_name);
     }
     boolean active;
 
@@ -16,8 +16,9 @@ public class Producent extends Thing {
     int max_amount;
 
 
-    public Producent(int max_amount) {
+    public Producent(int max_amount, String image_atlas_name) {
         this.max_amount = max_amount;
+        this.image_atlas_name = image_atlas_name;
         active = true;
         amount = 1;
     }

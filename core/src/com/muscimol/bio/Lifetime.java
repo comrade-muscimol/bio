@@ -1,5 +1,7 @@
 package com.muscimol.bio;
 
+import com.muscimol.bio.generate.Map;
+
 public class Lifetime extends Thread {
 
     public static boolean stopped;

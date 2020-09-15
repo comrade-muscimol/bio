@@ -1,7 +1,7 @@
 package com.muscimol.bio.creature;
 
 import com.muscimol.bio.Cell;
-import com.muscimol.bio.Map;
+import com.muscimol.bio.generate.Map;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +12,12 @@ public class Consument_4 extends Thing {
 
     public static Consument_4 createNew() {
         int index = ThreadLocalRandom.current().nextInt(Consuments_4.values().length);
-        return new Consument_4(Consuments_4.values()[index].max_satiety);
+        return new Consument_4(Consuments_4.values()[index].max_satiety, Consuments_4.values()[index].image_atlas_name);
     }
 
-    public Consument_4(int max_satiety) {
+    public Consument_4(int max_satiety, String image_atlas_name) {
         this.max_satiety = max_satiety;
+        this.image_atlas_name = image_atlas_name;
         satiety = max_satiety;
         active = true;
     }

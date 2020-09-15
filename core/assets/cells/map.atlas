@@ -1,152 +1,159 @@
 
 map.png
-size: 1024,512
+size: 2048,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 consument_1_1_cell
   rotate: false
-  xy: 657, 136
+  xy: 662, 133
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 consument_1_2_cell
   rotate: false
-  xy: 266, 267
+  xy: 266, 133
   size: 130, 129
   orig: 130, 129
   offset: 0, 0
   index: -1
 consument_1_3_cell
   rotate: false
-  xy: 264, 136
-  size: 129, 129
-  orig: 129, 129
+  xy: 266, 264
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 consument_2_1_cell
   rotate: false
-  xy: 788, 5
+  xy: 792, 2
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 consument_2_2_cell
   rotate: false
-  xy: 530, 267
+  xy: 134, 133
   size: 130, 129
   orig: 130, 129
   offset: 0, 0
   index: -1
 consument_2_3_cell
   rotate: false
-  xy: 657, 5
-  size: 129, 129
-  orig: 129, 129
+  xy: 398, 133
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 consument_3_1_cell
   rotate: false
-  xy: 2, 134
-  size: 129, 130
-  orig: 129, 130
+  xy: 662, 264
+  size: 129, 129
+  orig: 129, 129
   offset: 0, 0
   index: -1
 consument_3_2_cell
   rotate: false
-  xy: 2, 266
-  size: 130, 130
-  orig: 130, 130
+  xy: 398, 2
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 consument_3_3_cell
   rotate: false
   xy: 2, 2
-  size: 129, 130
-  orig: 129, 130
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 consument_4_1_cell
   rotate: false
-  xy: 264, 5
+  xy: 661, 2
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 consument_4_2_cell
   rotate: false
-  xy: 398, 267
+  xy: 134, 264
   size: 130, 129
   orig: 130, 129
   offset: 0, 0
   index: -1
 consument_4_3_cell
   rotate: false
-  xy: 133, 135
+  xy: 2, 264
+  size: 130, 129
+  orig: 130, 129
+  offset: 0, 0
+  index: -1
+dual_ready_cell
+  rotate: false
+  xy: 924, 264
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 empty_cell
   rotate: false
-  xy: 133, 4
+  xy: 530, 2
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 producent_1_cell
   rotate: false
-  xy: 526, 5
+  xy: 793, 133
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 producent_2_cell
   rotate: false
-  xy: 134, 267
+  xy: 2, 133
   size: 130, 129
   orig: 130, 129
   offset: 0, 0
   index: -1
 producent_3_cell
   rotate: false
-  xy: 526, 136
-  size: 129, 129
-  orig: 129, 129
+  xy: 398, 264
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 producent_ready_cell
   rotate: false
-  xy: 788, 136
-  size: 129, 129
-  orig: 129, 129
+  xy: 530, 264
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 reducent_1_cell
   rotate: false
-  xy: 395, 5
+  xy: 793, 264
   size: 129, 129
   orig: 129, 129
   offset: 0, 0
   index: -1
 reducent_2_cell
   rotate: false
-  xy: 794, 267
+  xy: 530, 133
   size: 130, 129
   orig: 130, 129
   offset: 0, 0
   index: -1
 reducent_3_cell
   rotate: false
-  xy: 395, 136
-  size: 129, 129
-  orig: 129, 129
+  xy: 134, 2
+  size: 130, 129
+  orig: 130, 129
   offset: 0, 0
   index: -1
 reducent_ready_cell
   rotate: false
-  xy: 662, 267
+  xy: 266, 2
   size: 130, 129
   orig: 130, 129
   offset: 0, 0

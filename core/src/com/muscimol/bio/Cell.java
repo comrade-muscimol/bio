@@ -93,4 +93,18 @@ public class Cell {
     public synchronized void setProducent_available(boolean producent_available) {
         this.producent_available = producent_available;
     }
+
+    public String getImageName(){
+        if(isEmpty()) return "empty_cell";
+
+        if(thing!=null){
+            return thing.getImageName();
+        }else{
+            if(producent_available&&reducent_available) return "dual_ready_cell";
+            if(producent_available) return "producent_ready_cell";
+            if(reducent_available) return "reducent_ready_cell";
+        }
+
+        return "empty_cell";
+    }
 }
