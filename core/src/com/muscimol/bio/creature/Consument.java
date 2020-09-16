@@ -15,6 +15,9 @@ public abstract class Consument extends Thing {
 
     protected int reproduction_chance;
 
+    protected int moves;
+    protected int max_moves;
+
     @Override
     public void action(Cell cell) {
         if (!active) {
@@ -40,6 +43,7 @@ public abstract class Consument extends Thing {
                 break;
 
             case SUCCESS:
+                moves = max_moves;
                 satiety++;
                 tryReproduction(cell);
                 System.out.println("success. satiety:"+satiety);
@@ -160,11 +164,16 @@ public abstract class Consument extends Thing {
                 Map.getInstance().set(temp_move_from.getX(), temp_move_from.getY(), temp_move_from);
                 Map.getInstance().set(temp_move_to.getX(), temp_move_to.getY(), temp_move_to);
 
-                satiety--;
-                if(satiety<=0){
-                    active = false;
-                    System.out.println("Умер в успешном  движении");
+                if(moves<=0){
+                    satiety--;
+                    if(satiety<=0){
+                        active = false;
+                        System.out.println("Умер в успешном  движении");
+                    }
                 }
+                moves--;
+
+
                 System.out.println("move complete. satiety:"+satiety);
             }catch (Exception e){
                 System.out.println("move failed. satiety:"+satiety);
@@ -172,11 +181,14 @@ public abstract class Consument extends Thing {
             }
         }else{
             System.out.println("нет пододящих для движения клеток");
-            satiety--;
-            if(satiety<=0){
-                active = false;
-                System.out.println("Умер в движении");
+            if(moves<=0){
+                satiety--;
+                if(satiety<=0){
+                    active = false;
+                    System.out.println("Умер в движении");
+                }
             }
+            moves--;
         }
 
 
