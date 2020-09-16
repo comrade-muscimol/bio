@@ -7,12 +7,12 @@ public class GeneratorSettings {
         y = 200;
 
         reducent_percent = 5.0f;
-        producent_percent = 10.0f;
+        producent_percent = 5.0f;
 
-        consument_1_percent = 20.0f;
-        consument_2_percent = 10.0f;
-        consument_3_percent = 5.0f;
-        consument_4_percent = 1.0f;
+        consument_1_percent = 5.0f;
+        consument_2_percent = 5.0f;
+        consument_3_percent = 3.0f;
+        consument_4_percent = 2.0f;
     }
 
     public static int x;

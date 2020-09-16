@@ -4,7 +4,7 @@ import com.muscimol.bio.Cell;
 
     public abstract class Thing {
 
-    private boolean active;
+    protected boolean active;
     protected String image_atlas_name;
 
     public boolean isActive() {
@@ -17,7 +17,7 @@ import com.muscimol.bio.Cell;
         return image_atlas_name;
     }
 
-    public abstract void action(Cell cell);
+    public  abstract void action(Cell cell);
 
     public abstract boolean isEaten();
 

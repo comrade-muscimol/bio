@@ -21,11 +21,11 @@ public class Lifetime extends Thread {
     public void run() {
         while(true){
 
-            System.out.println("LIFETIME ACTION");
+            //System.out.println("LIFETIME ACTION");
             if(!stopped) {
 
-                //Map.getInstance().action();
-                System.out.println(new Date());
+                Map.getInstance().action();
+                //System.out.println(new Date());
 
                 try {
                     Thread.sleep(mills);

@@ -11,7 +11,6 @@ public class Reducent extends Thing {
         return new Reducent(Reducents.values()[index].counts, Reducents.values()[index].image_atlas_name);
     }
 
-    private boolean active;
     private int counter;
 
     private Reducent(int counter, String image_atlas_name) {

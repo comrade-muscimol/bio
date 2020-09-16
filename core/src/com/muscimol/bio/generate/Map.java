@@ -70,10 +70,10 @@ public class Map {
     public synchronized Cell get(int x, int y){
         return map.get(x).get(y);
     }
-    public  void set(int x, int y, Cell cell) {
+    public synchronized   void set(int x, int y, Cell cell) {
         map.get(x).set(y, cell);
     }
-    public synchronized List<List<Cell>> getMap(){
+    public List<List<Cell>> getMap(){
         return map;
     }
     public List<Cell> getNear(int x, int y){

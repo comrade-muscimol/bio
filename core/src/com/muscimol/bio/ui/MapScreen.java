@@ -128,7 +128,7 @@ public class MapScreen implements Screen {
         pane.setScrollingDisabled(false, false);
         pane.setBounds(0 ,0 ,out.getHeight() , out.getWidth());
 
-        System.out.println("set position to x:"+map_scroll_percent_x+"- y:"+map_scroll_percent_y);
+        //System.out.println("set position to x:"+map_scroll_percent_x+"- y:"+map_scroll_percent_y);
 
 
         pane.setOverscroll(false, false);

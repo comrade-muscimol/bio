@@ -30,16 +30,22 @@ public class Cell {
         thing = null;
     }
 
-    public void action(){
+    public synchronized void action(){
 
         if(thing!=null){
+
             if(thing.isActive()){
+
                 thing.action(this);
+
             }else{
+
                 clean();
             }
         }else{
+
             if(reducent_available&&producent_available){
+
                 int random_int = ThreadLocalRandom.current().nextInt(1);
                 switch (random_int){
                     case 0:
@@ -52,7 +58,6 @@ public class Cell {
                         break;
                     default:
                 }
-
             }
             else if(reducent_available) {
                 thing = Reducent.createNew();
@@ -67,15 +72,16 @@ public class Cell {
 
     }
     private void clean(){
-        if (thing==null) return;
 
         if(thing instanceof Producent){
             producent_available = false;
+            System.out.println("CLEAN PRODUCENT");
         }
 
         if (thing instanceof Reducent){
             producent_available = true;
             reducent_available = false;
+            System.out.println("CLEAN REDUCENT");
         }
 
         if(thing instanceof Consument_1
@@ -83,6 +89,7 @@ public class Cell {
                 ||thing instanceof Consument_3
                 ||thing instanceof Consument_4){
             reducent_available = true;
+            System.out.println("CLEAN CONSUMENT");
         }
 
         thing = null;

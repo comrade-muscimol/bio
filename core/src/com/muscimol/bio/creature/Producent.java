@@ -10,13 +10,12 @@ public class Producent extends Thing {
         int index = ThreadLocalRandom.current().nextInt(Producents.values().length);
         return new Producent(Producents.values()[index].max_amount, Producents.values()[index].image_atlas_name);
     }
-    boolean active;
 
     int amount;
     int max_amount;
 
 
-    public Producent(int max_amount, String image_atlas_name) {
+    private Producent(int max_amount, String image_atlas_name) {
         this.max_amount = max_amount;
         this.image_atlas_name = image_atlas_name;
         active = true;
@@ -25,12 +24,12 @@ public class Producent extends Thing {
 
     @Override
     public void action(Cell cell) {
-
         if (!active) return;
         if (amount<=0) {
             active = false;
             return;
         }
+
 
         if (amount<max_amount) amount++;
 
@@ -42,6 +41,7 @@ public class Producent extends Thing {
 
         if(amount>0) {
             amount--;
+            if(amount<=0) active=false;
             return true;
         }else{
             active = false;
