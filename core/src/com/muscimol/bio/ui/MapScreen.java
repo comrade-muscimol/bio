@@ -129,7 +129,6 @@ public class MapScreen implements Screen {
 
         //System.out.println("set position to x:"+map_scroll_percent_x+"- y:"+map_scroll_percent_y);
 
-
         pane.setOverscroll(false, false);
 
         pane.layout();
@@ -137,9 +136,7 @@ public class MapScreen implements Screen {
         pane.setScrollPercentY(map_scroll_percent_y);
         pane.updateVisualScroll();
 
-
         pane.setName("map_scroll_pane");
-
 
         out.addActor(pane);
 

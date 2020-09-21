@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -20,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.graphics.Color;
 import com.muscimol.bio.generate.Map;
 
+import java.util.Date;
+
 
 public class LoadingScreen implements Screen {
 
@@ -27,7 +30,7 @@ public class LoadingScreen implements Screen {
 
     
 
-    
+    private long last_updated;
 
     private Game game;
 
@@ -47,10 +50,11 @@ public class LoadingScreen implements Screen {
     public void show() {
         stage = new Stage(new ExtendViewport(800, 600));
 
-        atlas = new TextureAtlas(Gdx.files.internal("cells/map.atlas"));
-        skin = new Skin(Gdx.files.internal("cells/map.json"), atlas);
+        atlas = new TextureAtlas(Gdx.files.internal("loading/loading.atlas"));
+        skin = new Skin(Gdx.files.internal("loading/loading.json"), atlas);
 
-        raleway_medium_32_EEDFDF = createFont(32, new Color(238 / 255f, 223 / 255f, 223 / 255f, 1), "font/Raleway-Medium.ttf");
+        raleway_medium_32_EEDFDF = createFont(16, new Color(238 / 255f, 223 / 255f, 223 / 255f, 1), "font/Raleway-Medium.ttf");
+        last_updated = new Date().getTime()-1000;
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -58,20 +62,33 @@ public class LoadingScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        if(true) {
+
+        if(new Date().getTime()-last_updated>1000) {
+            Gdx.gl.glClearColor(0, 0, 1, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             try {
                 stage.getRoot().findActor("bars").clearListeners();
                 stage.getRoot().removeActor(stage.getRoot().findActor("bars"));
 
-            }catch (Exception e){
+            } catch (Exception e) {
 
                 e.printStackTrace();
             }
 
-            try {       stage.getRoot().addActor(generateBars());    }catch (Exception e){e.printStackTrace();}
+            try {
+                Group bars = generateBars();
+                stage.getRoot().addActor(bars);
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            last_updated = new Date().getTime();
         }
+
+
 
         stage.act(delta);
         stage.draw();
@@ -100,6 +117,12 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
+
+        atlas.dispose();
+        skin.dispose();
+
+        raleway_medium_32_EEDFDF.dispose();
 
     }
 
@@ -108,15 +131,13 @@ public class LoadingScreen implements Screen {
 
     
     private Group generateBars(){
-
-        int x = 0;
-        int height = 64;
-        int padding = 8;
+        float x = 0f;
+        float height = (float)64/2;
+        float padding = (float)8/2;
 
 
         Group out = new Group();
         out.setName("bars");
-
 
         Group reducent_bar;
         Group producent_bar;
@@ -132,12 +153,12 @@ public class LoadingScreen implements Screen {
         consument_3_bar = generateBar(Type.CONSUMENT_3, 0, 0, 500);
         consument_4_bar = generateBar(Type.CONSUMENT_4, 15, 15, 500);
 
-        reducent_bar.setPosition(x, 0);
-        producent_bar.setPosition(x, (height*1)+(padding*1));
-        consument_1_bar.setPosition(x, (height*2)+(padding*2));
-        consument_2_bar.setPosition(x, (height*3)+(padding*3));
-        consument_3_bar.setPosition(x, (height*4)+(padding*4));
-        consument_4_bar.setPosition(x, (height*5)+(padding*5));
+        consument_4_bar.setPosition(x, 0);
+        consument_3_bar.setPosition(x, (height*1)+(padding*1));
+        consument_2_bar.setPosition(x, (height*2)+(padding*2));
+        consument_1_bar.setPosition(x, (height*3)+(padding*3));
+        producent_bar.setPosition(x, (height*4)+(padding*4));
+        reducent_bar.setPosition(x, (height*5)+(padding*5));
 
         out.addActor(reducent_bar);
         out.addActor(producent_bar);
@@ -147,9 +168,16 @@ public class LoadingScreen implements Screen {
         out.addActor(consument_4_bar);
 
 
+        System.out.println("position");
+        System.out.println("stage:x-y "+stage.getWidth()+" "+stage.getHeight());
+        System.out.println("out:x-y "+out.getHeight()+" "+out.getWidth());
+
+        out.setWidth(reducent_bar.getWidth());
+        out.setHeight((height*5)+(padding*5));
+
         out.setPosition(
-                ((stage.getWidth()/2)- (out.getWidth()/2)),
-                ((stage.getHeight()/2)- (out.getHeight()/2))
+                ((stage.getWidth()/(float)2) - (out.getWidth()/(float)2)),
+                ((stage.getHeight()/(float)2) - (out.getHeight()/(float)2))
         );
 
         return out;
@@ -194,11 +222,10 @@ public class LoadingScreen implements Screen {
                 out.setName("error_bar");
         }
 
-
-        int y = 0;
-        int height = 64;
-        int width = 32;
-        int padding = 8;
+        float y = 0;
+        float height = (float)64/2;
+        float width = (float)32/2;
+        float padding = (float)8/2;
 
         for(int i = 0; i<20; i++){
             Image segment;
@@ -209,8 +236,9 @@ public class LoadingScreen implements Screen {
                 segment = new Image(atlas.findRegion(empty_id));
             }
 
-            int x = i*(width+padding);
+            float x = i*(width+padding);
             segment.setBounds(x, y, width, height);
+            out.addActor(segment);
         }
 
         Label.LabelStyle done_labelStyle = new Label.LabelStyle();
@@ -224,9 +252,9 @@ public class LoadingScreen implements Screen {
         done_label.setBounds((20*(width+padding)), y, width, height);
         out.addActor(done_label);
 
-
+        out.setHeight(height);
+        out.setWidth((20*(width+padding))+done_label.getWidth());
         return out;
-
     }
 
 

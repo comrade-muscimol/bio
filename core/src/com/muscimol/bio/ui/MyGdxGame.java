@@ -10,13 +10,13 @@ public class MyGdxGame extends Game {
 	@Override
 	public void create () {
 
-		Map.getInstance();
-
-		if(Lifetime.current==null){
-			Lifetime.current = new Lifetime();
-
-			Lifetime.current.start();
-		}
+//		Map.getInstance();
+//
+//		if(Lifetime.current==null){
+//			Lifetime.current = new Lifetime();
+//
+//			Lifetime.current.start();
+//		}
 		//this.setScreen(new MapScreen(this));
 		this.setScreen(new LoadingScreen(this));
 	}
