@@ -75,13 +75,13 @@ public class Cell {
 
         if(thing instanceof Producent){
             producent_available = false;
-            System.out.println("CLEAN PRODUCENT");
+            //System.out.println("CLEAN PRODUCENT");
         }
 
         if (thing instanceof Reducent){
             producent_available = true;
             reducent_available = false;
-            System.out.println("CLEAN REDUCENT");
+            //System.out.println("CLEAN REDUCENT");
         }
 
         if(thing instanceof Consument_1
@@ -89,7 +89,7 @@ public class Cell {
                 ||thing instanceof Consument_3
                 ||thing instanceof Consument_4){
             reducent_available = true;
-            System.out.println("CLEAN CONSUMENT");
+            //System.out.println("CLEAN CONSUMENT");
         }
 
         thing = null;

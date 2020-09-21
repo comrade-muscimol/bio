@@ -1,0 +1,55 @@
+
+loading.png
+size: 256,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+consument_1_bar_segment
+  rotate: false
+  xy: 104, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+consument_2_bar_segment
+  rotate: false
+  xy: 138, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+consument_3_bar_segment
+  rotate: false
+  xy: 172, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+consument_4_bar_segment
+  rotate: false
+  xy: 206, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+empty_bar_segment
+  rotate: false
+  xy: 2, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+producent_bar_segment
+  rotate: false
+  xy: 36, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+reducent_bar_segment
+  rotate: false
+  xy: 70, 2
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1

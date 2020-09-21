@@ -29,16 +29,16 @@ public abstract class Consument extends Thing {
             return;
         }
 
-        System.out.println("active. satiety:"+satiety);
+        //System.out.println("active. satiety:"+satiety);
 
         switch (tryEat(cell)){
 
             case FAILED:
             case NO_TARGETS:
-                System.out.println("no targets try to move. satiety:"+satiety);
+                //System.out.println("no targets try to move. satiety:"+satiety);
 
                 tryMove(cell);
-                System.out.println("после попытки идти. satiety:"+satiety);
+                //System.out.println("после попытки идти. satiety:"+satiety);
 
                 break;
 
@@ -46,14 +46,14 @@ public abstract class Consument extends Thing {
                 moves = max_moves;
                 satiety++;
                 tryReproduction(cell);
-                System.out.println("success. satiety:"+satiety);
+                //System.out.println("success. satiety:"+satiety);
                 break;
 
             case MAX_SATIETY:
-                System.out.println("max satiety. try to rep. satiety before:"+satiety);
+                //System.out.println("max satiety. try to rep. satiety before:"+satiety);
                 tryReproduction(cell);
                 satiety--;
-                System.out.println("max satiety. try to rep. satiety after:"+satiety);
+                //System.out.println("max satiety. try to rep. satiety after:"+satiety);
                 break;
 
         }
@@ -126,9 +126,9 @@ public abstract class Consument extends Thing {
 
         if(reproduction_chance>random_int){
                 good.get(0).setThing(getClone());
-            System.out.println("reproduction done. satiety:"+satiety);
+            //System.out.println("reproduction done. satiety:"+satiety);
         }else{
-            System.out.println("no reproduction. satiety:"+satiety);
+            //System.out.println("no reproduction. satiety:"+satiety);
         }
 
     }
@@ -149,7 +149,8 @@ public abstract class Consument extends Thing {
         }
 
         if(!good.isEmpty()){
-            System.out.println("move start");
+            Collections.shuffle(good);
+            //System.out.println("move start");
             try{
 
                 Cell temp_move_from = Map.getInstance().get(x, y);
@@ -168,24 +169,24 @@ public abstract class Consument extends Thing {
                     satiety--;
                     if(satiety<=0){
                         active = false;
-                        System.out.println("Умер в успешном  движении");
+                        //System.out.println("Умер в успешном  движении");
                     }
                 }
                 moves--;
 
 
-                System.out.println("move complete. satiety:"+satiety);
+                //System.out.println("move complete. satiety:"+satiety);
             }catch (Exception e){
-                System.out.println("move failed. satiety:"+satiety);
+                //System.out.println("move failed. satiety:"+satiety);
                 e.printStackTrace();
             }
         }else{
-            System.out.println("нет пододящих для движения клеток");
+            //System.out.println("нет пододящих для движения клеток");
             if(moves<=0){
                 satiety--;
                 if(satiety<=0){
                     active = false;
-                    System.out.println("Умер в движении");
+                    //System.out.println("Умер в движении");
                 }
             }
             moves--;
@@ -202,10 +203,6 @@ public abstract class Consument extends Thing {
         FAILED,
         NO_TARGETS,
         SUCCESS
-
-
-
-
     }
 
 }

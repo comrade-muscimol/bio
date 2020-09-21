@@ -1,9 +1,9 @@
 package com.muscimol.bio.creature;
 
 public enum Producents {
-    SMALL(3, "producent_1_cell"),
-    MIDDLE(5, "producent_2_cell"),
-    BIG(7, "producent_3_cell");
+    SMALL(2, "producent_1_cell"),
+    MIDDLE(3, "producent_2_cell"),
+    BIG(4, "producent_3_cell");
 
     int max_amount;
     String image_atlas_name;

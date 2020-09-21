@@ -43,22 +43,22 @@ public class Map {
         }
 
         set_reducent();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         set_producent();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         set_consument_1();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         set_consument_2();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         set_consument_3();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         set_consument_4();
-        System.out.println("-----------");
+        //System.out.println("-----------");
 
         lastUpdated = new Date().getTime();
     }
@@ -107,13 +107,13 @@ public class Map {
 
 
     private void set_reducent(){
-        System.out.println("set_reducent{");
+        //System.out.println("set_reducent{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -122,7 +122,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -130,7 +130,7 @@ public class Map {
                 GeneratorSettings.reducent_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -143,40 +143,40 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Reducent.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
     private void set_producent(){
-        System.out.println("set_producent{");
+        //System.out.println("set_producent{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -185,7 +185,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -193,7 +193,7 @@ public class Map {
                         GeneratorSettings.producent_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -206,40 +206,40 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Producent.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
     private void set_consument_1(){
-        System.out.println("set_consument_1{");
+        //System.out.println("set_consument_1{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -248,7 +248,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -256,7 +256,7 @@ public class Map {
                         GeneratorSettings.consument_1_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -269,40 +269,40 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Consument_1.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
     private void set_consument_2(){
-        System.out.println("set_consument_2{");
+        //System.out.println("set_consument_2{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -311,7 +311,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -319,7 +319,7 @@ public class Map {
                         GeneratorSettings.consument_2_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -332,40 +332,40 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Consument_2.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
     private void set_consument_3(){
-        System.out.println("set_consument_3{");
+        //System.out.println("set_consument_3{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -374,7 +374,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -382,7 +382,7 @@ public class Map {
                         GeneratorSettings.consument_3_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -395,40 +395,40 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Consument_3.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
     private void set_consument_4(){
-        System.out.println("set_consument_4{");
+        //System.out.println("set_consument_4{");
 
         List<Cell> cells = new ArrayList<>();
 
         int height = map.size();
         int width = map.get(0).size();
-        System.out.println("height:"+height+"-width:"+width);
+        //System.out.println("height:"+height+"-width:"+width);
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -437,7 +437,7 @@ public class Map {
         }
 
         int field = cells.size(); // до 46к на 46к примерно 2млрд
-        System.out.println("field:"+field);
+        //System.out.println("field:"+field);
 
         int units = (int)(
                 ((double)field/(double)100)
@@ -445,7 +445,7 @@ public class Map {
                         GeneratorSettings.consument_4_percent);
 
         if(units<=0) units=1;
-        System.out.println("units:"+units);
+        //System.out.println("units:"+units);
         int counter = 0;
 
         while(counter<units){
@@ -458,30 +458,30 @@ public class Map {
 
                 int cell_x = cells.get(0).getX();
                 int cell_y = cells.get(0).getY();
-                System.out.println("cell correct:"+cell_x+"-"+cell_y);
+                //System.out.println("cell correct:"+cell_x+"-"+cell_y);
 
 
                 Cell temp = get(cell_x, cell_y);
 
                 if(temp.getThing()==null){
-                    System.out.println("info_before:"+temp.getImageName());
+                    //System.out.println("info_before:"+temp.getImageName());
                 }else{
-                    System.out.println("info_before:"+temp.getThing().getImageName());
+                    //System.out.println("info_before:"+temp.getThing().getImageName());
                 }
                 cells.remove(0);
                 temp.setThing(Consument_4.createNew());
 
                 set(cell_x, cell_y, temp);
-                System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
+                //System.out.println("info_after:"+get(cell_x, cell_y).getThing().getImageName());
 
                 counter++;
 
             }else{
-                System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
+                //System.out.println("cell incorrect:"+cells.get(0).getX()+"-"+cells.get(0).getX());
                 cells.remove(0);
             }
 
         }
-        System.out.println("}");
+        //System.out.println("}");
     }
 }

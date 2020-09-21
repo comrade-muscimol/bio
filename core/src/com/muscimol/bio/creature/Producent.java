@@ -46,9 +46,7 @@ public class Producent extends Thing {
         }else{
             active = false;
             return false;
+
         }
     }
-
-
-
 }

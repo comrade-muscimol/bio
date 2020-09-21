@@ -3,8 +3,8 @@ package com.muscimol.bio.generate;
 public class GeneratorSettings {
 
     static{
-        x = 200;
-        y = 200;
+        x = 50;
+        y = 50;
 
         reducent_percent = 5.0f;
         producent_percent = 5.0f;

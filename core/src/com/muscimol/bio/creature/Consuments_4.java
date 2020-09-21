@@ -1,9 +1,9 @@
 package com.muscimol.bio.creature;
 
 public enum Consuments_4 {
-    SMALL(2,10, 5, "consument_4_1_cell"),
-    MIDDLE(4, 5,5,"consument_4_2_cell"),
-    BIG(6,2, 5,"consument_4_3_cell");
+    SMALL(2,10, 25, "consument_4_1_cell"),
+    MIDDLE(4, 5,30,"consument_4_2_cell"),
+    BIG(6,2, 35,"consument_4_3_cell");
 
     int max_satiety;
     int max_moves;

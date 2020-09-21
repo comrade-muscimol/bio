@@ -18,7 +18,6 @@ public class MapScreen implements Screen {
     private volatile float map_scroll_percent_x = 0f ;
     private volatile float map_scroll_percent_y = 0f ;
 
-    boolean test = true;
     private long lastUpdated;
 
     private int cell_size = 32;
@@ -37,7 +36,7 @@ public class MapScreen implements Screen {
 
     @Override
     public void show() {
-        stage = new Stage(new ExtendViewport(480, 640));
+        stage = new Stage(new ExtendViewport(800, 600));
 
         atlas = new TextureAtlas(Gdx.files.internal("cells/map.atlas"));
         skin = new Skin(Gdx.files.internal("cells/map.json"), atlas);

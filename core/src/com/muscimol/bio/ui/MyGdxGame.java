@@ -17,7 +17,8 @@ public class MyGdxGame extends Game {
 
 			Lifetime.current.start();
 		}
-		this.setScreen(new MapScreen(this));
+		//this.setScreen(new MapScreen(this));
+		this.setScreen(new LoadingScreen(this));
 	}
 
 	@Override
