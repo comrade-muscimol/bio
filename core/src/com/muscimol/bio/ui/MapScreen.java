@@ -11,9 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.muscimol.bio.Lifetime;
+import com.muscimol.bio.generate.GeneratorDefaultSettings;
 import com.muscimol.bio.generate.Map;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MapScreen implements Screen {
+
+    private Map map;
 
     private volatile float map_scroll_percent_x = 0f ;
     private volatile float map_scroll_percent_y = 0f ;
@@ -30,8 +36,10 @@ public class MapScreen implements Screen {
     private Stage stage;
 
 
-    public MapScreen(Game game) {
+    public MapScreen(Game game, Map map) {
         this.game = game;
+
+        this.map = map;
     }
 
     @Override
@@ -41,6 +49,12 @@ public class MapScreen implements Screen {
         atlas = new TextureAtlas(Gdx.files.internal("cells/map.atlas"));
         skin = new Skin(Gdx.files.internal("cells/map.json"), atlas);
 
+        if(Lifetime.current==null){
+            Lifetime.current = new Lifetime(map);
+
+            Lifetime.current.start();
+        }
+
         Gdx.input.setInputProcessor(stage);
 
     }
@@ -48,7 +62,7 @@ public class MapScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        if(lastUpdated!=Map.getInstance().getLastUpdateTime()) {
+        if(lastUpdated!=map.getLastUpdateTime()) {
             //System.out.println("before try:   x:"+map_scroll_percent_x+"-y:"+map_scroll_percent_y);
             try {
                 ScrollPane temp_pane = (ScrollPane) stage.getRoot().findActor("map_scroll_pane");
@@ -67,7 +81,7 @@ public class MapScreen implements Screen {
 
             try {       stage.getRoot().addActor(generate_map());    }catch (Exception e){e.printStackTrace();}
 
-            lastUpdated = Map.getInstance().getLastUpdateTime();
+            lastUpdated = map.getLastUpdateTime();
         }
 
         stage.act(delta);
@@ -111,11 +125,11 @@ public class MapScreen implements Screen {
         table.defaults().width(cell_size).height(cell_size);
 
 
-        for(int i = 0; i<Map.getInstance().getMap().size(); i++){
-            for(int o = 0; o<Map.getInstance().getMap().get(i).size();o++){
+        for(int i = 0; i<map.getEarth().size(); i++){
+            for(int o = 0; o<map.getEarth().get(i).size();o++){
 
                 table.add(
-                        new Image(atlas.findRegion(Map.getInstance().get(i, o).getImageName()))
+                        new Image(atlas.findRegion(map.get(i, o).getImageName()))
                 );
 
             }

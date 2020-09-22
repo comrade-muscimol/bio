@@ -7,10 +7,12 @@ import com.muscimol.bio.creature.Consument_4;
 import com.muscimol.bio.creature.Producent;
 import com.muscimol.bio.creature.Reducent;
 import com.muscimol.bio.creature.Thing;
+import com.muscimol.bio.generate.Map;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Cell {
+    private Map map;
 
     private int x;
     private int y;
@@ -20,9 +22,10 @@ public class Cell {
 
     private Thing thing;
 
-    public Cell(int x, int y){
+    public Cell(int x, int y, Map map){
         this.x = x;
         this.y = y;
+        this.map = map;
 
         reducent_available = false;
         producent_available = false;
@@ -49,22 +52,22 @@ public class Cell {
                 int random_int = ThreadLocalRandom.current().nextInt(1);
                 switch (random_int){
                     case 0:
-                        thing = Reducent.createNew();
+                        thing = Reducent.createRandom();
                         reducent_available = false;
                         break;
                     case 1:
-                        thing = Producent.createNew();
+                        thing = Producent.createRandom();
                         producent_available = false;
                         break;
                     default:
                 }
             }
             else if(reducent_available) {
-                thing = Reducent.createNew();
+                thing = Reducent.createRandom();
                 reducent_available = false;
             }
             else if(producent_available) {
-                thing = Producent.createNew();
+                thing = Producent.createRandom();
                 producent_available = false;
             }
 
@@ -143,5 +146,9 @@ public class Cell {
         }
 
         return "empty_cell";
+    }
+
+    public Map getMap() {
+        return map;
     }
 }

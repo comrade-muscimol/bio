@@ -18,6 +18,7 @@ public abstract class Consument extends Thing {
     protected int moves;
     protected int max_moves;
 
+
     @Override
     public void action(Cell cell) {
         if (!active) {
@@ -72,7 +73,7 @@ public abstract class Consument extends Thing {
 
     protected EatResponses tryEat(Cell cell) {
 
-        List<Cell> near = Map.getInstance().getNear(cell.getX(), cell.getY());
+        List<Cell> near = cell.getMap().getNear(cell.getX(), cell.getY());
         List<Cell> good = new ArrayList<>();
 
         for (Cell c : near) {
@@ -90,7 +91,7 @@ public abstract class Consument extends Thing {
 
             if (satiety < max_satiety) {
                 if (
-                        Map.getInstance().get(
+                        cell.getMap().get(
                                 good.get(0).getX(), good.get(0).getY()
                         ).getThing().isEaten()
                 ) {
@@ -108,7 +109,7 @@ public abstract class Consument extends Thing {
 
     }
     protected void tryReproduction(Cell cell) {
-        List<Cell> near = Map.getInstance().getNear(
+        List<Cell> near = cell.getMap().getNear(
                 cell.getX(),
                 cell.getY()
         );
@@ -136,7 +137,7 @@ public abstract class Consument extends Thing {
         int x = cell.getX();
         int y = cell.getY();
 
-        List<Cell> near = Map.getInstance().getNear(x, y);
+        List<Cell> near = cell.getMap().getNear(x, y);
         List<Cell> good = new ArrayList<>();
 
 
@@ -153,8 +154,8 @@ public abstract class Consument extends Thing {
             //System.out.println("move start");
             try{
 
-                Cell temp_move_from = Map.getInstance().get(x, y);
-                Cell temp_move_to = Map.getInstance().get(
+                Cell temp_move_from = cell.getMap().get(x, y);
+                Cell temp_move_to = cell.getMap().get(
                         good.get(0).getX(),
                         good.get(0).getY()
                 );
@@ -162,8 +163,8 @@ public abstract class Consument extends Thing {
                 temp_move_to.setThing(temp_move_from.getThing());
                 temp_move_from.setThing(null);
 
-                Map.getInstance().set(temp_move_from.getX(), temp_move_from.getY(), temp_move_from);
-                Map.getInstance().set(temp_move_to.getX(), temp_move_to.getY(), temp_move_to);
+                cell.getMap().set(temp_move_from.getX(), temp_move_from.getY(), temp_move_from);
+                cell.getMap().set(temp_move_to.getX(), temp_move_to.getY(), temp_move_to);
 
                 if(moves<=0){
                     satiety--;

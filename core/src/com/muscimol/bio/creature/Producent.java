@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Producent extends Thing {
 
-    public static Producent createNew() {
+    public static Producent createRandom() {
         int index = ThreadLocalRandom.current().nextInt(Producents.values().length);
         return new Producent(Producents.values()[index].max_amount, Producents.values()[index].image_atlas_name);
     }
@@ -15,7 +15,7 @@ public class Producent extends Thing {
     int max_amount;
 
 
-    private Producent(int max_amount, String image_atlas_name) {
+    public Producent(int max_amount, String image_atlas_name) {
         this.max_amount = max_amount;
         this.image_atlas_name = image_atlas_name;
         active = true;
@@ -48,5 +48,9 @@ public class Producent extends Thing {
             return false;
 
         }
+    }
+    @Override
+    public Thing duplicate() {
+        return new Producent(max_amount, image_atlas_name);
     }
 }

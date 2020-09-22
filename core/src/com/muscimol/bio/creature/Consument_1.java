@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Consument_1 extends Consument {
 
-    public static Consument_1 createNew() {
+    public static Consument_1 createRandom() {
         int index = ThreadLocalRandom.current().nextInt(Consuments_1.values().length);
         return new Consument_1(
                 Consuments_1.values()[index].max_satiety,
@@ -50,6 +50,11 @@ public class Consument_1 extends Consument {
     protected boolean isEdible(Thing thing){
         if (thing instanceof Producent) return true;
         else return false;
+    }
+
+    @Override
+    public Thing duplicate() {
+        return getClone();
     }
 }
 

@@ -13,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import com.badlogic.gdx.graphics.Color;
+import com.muscimol.bio.generate.GeneratorDefaultSettings;
 import com.muscimol.bio.generate.Map;
 
 import java.util.Date;
@@ -29,6 +29,7 @@ public class LoadingScreen implements Screen {
     public static final String FONT_CHARACTERS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789][_!$%#@|\\/?-+=()*&.:;,{}\"´`'<>";
 
     
+    private Map map;
 
     private long last_updated;
 
@@ -44,6 +45,11 @@ public class LoadingScreen implements Screen {
 
     LoadingScreen (Game game){
         this.game = game;
+
+        this.map = new Map(GeneratorDefaultSettings.size);
+
+        new GenerationThread(game, map).start();
+
     }
 
     @Override
@@ -53,7 +59,7 @@ public class LoadingScreen implements Screen {
         atlas = new TextureAtlas(Gdx.files.internal("loading/loading.atlas"));
         skin = new Skin(Gdx.files.internal("loading/loading.json"), atlas);
 
-        raleway_medium_32_EEDFDF = createFont(16, new Color(238 / 255f, 223 / 255f, 223 / 255f, 1), "font/Raleway-Medium.ttf");
+        raleway_medium_32_EEDFDF = createFont(32, new Color(238 / 255f, 223 / 255f, 223 / 255f, 1), "font/Raleway-Medium.ttf");
         last_updated = new Date().getTime()-1000;
 
         Gdx.input.setInputProcessor(stage);
@@ -64,7 +70,7 @@ public class LoadingScreen implements Screen {
 
 
         if(new Date().getTime()-last_updated>1000) {
-            Gdx.gl.glClearColor(0, 0, 1, 1);
+            Gdx.gl.glClearColor(0,1,1,1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             try {
@@ -146,12 +152,12 @@ public class LoadingScreen implements Screen {
         Group consument_3_bar;
         Group consument_4_bar;
 
-        reducent_bar = generateBar(Type.REDUCENT, 40, 40, 500);
-        producent_bar = generateBar(Type.PRODUCENT, 35, 35, 500);
-        consument_1_bar = generateBar(Type.CONSUMENT_1, 1, 1, 500);
-        consument_2_bar = generateBar(Type.CONSUMENT_2, 100, 100, 500);
-        consument_3_bar = generateBar(Type.CONSUMENT_3, 0, 0, 500);
-        consument_4_bar = generateBar(Type.CONSUMENT_4, 15, 15, 500);
+        reducent_bar = generateBar(Type.REDUCENT, ((double)map.reducent_done/(double)map.reducent_all)*100, map.reducent_done, map.reducent_all);
+        producent_bar = generateBar(Type.PRODUCENT, ((double)map.producent_done/(double)map.producent_all)*100, map.producent_done, map.producent_all);
+        consument_1_bar = generateBar(Type.CONSUMENT_1, ((double)map.consument_1_done/(double)map.consument_1_all)*100, map.consument_1_done, map.consument_1_all);
+        consument_2_bar = generateBar(Type.CONSUMENT_2, ((double)map.consument_2_done/(double)map.consument_2_all)*100, map.consument_2_done, map.consument_2_all);
+        consument_3_bar = generateBar(Type.CONSUMENT_3, ((double)map.consument_3_done/(double)map.consument_3_all)*100, map.consument_3_done, map.consument_3_all);
+        consument_4_bar = generateBar(Type.CONSUMENT_4, ((double)map.consument_4_done/(double)map.consument_4_all)*100, map.consument_4_done, map.consument_4_all);
 
         consument_4_bar.setPosition(x, 0);
         consument_3_bar.setPosition(x, (height*1)+(padding*1));

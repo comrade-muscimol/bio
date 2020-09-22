@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Consument_4 extends Consument {
 
-    public static Consument_4 createNew() {
+    public static Consument_4 createRandom() {
         int index = ThreadLocalRandom.current().nextInt(Consuments_4.values().length);
         return new Consument_4(
                 Consuments_4.values()[index].max_satiety,
@@ -53,6 +53,9 @@ public class Consument_4 extends Consument {
         else return false;
     }
 
-
+    @Override
+    public Thing duplicate() {
+        return getClone();
+    }
 
 }
