@@ -139,8 +139,8 @@ public class MapScreen implements Screen {
         table.defaults().width(cell_size).height(cell_size);
 
 
-        for(int i = 0; i<map.getEarth().size(); i++){
-            for(int o = 0; o<map.getEarth().get(i).size();o++){
+        for(int i = 0; i<map.getGround().size(); i++){
+            for(int o = 0; o<map.getGround().get(i).size(); o++){
 
                 table.add(
                         new Image(atlas.findRegion(map.get(i, o).getImageName()))

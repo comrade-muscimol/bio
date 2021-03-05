@@ -26,8 +26,10 @@ public class Map {
 
     private long lastUpdated;
 
-    private List<List<Cell>> earth;
+    private List<List<Cell>> ground;
+
     private GenerateInfo generateInfo;
+    private  MapStatistics mapStatistics;
 
     public GenerateInfo getGenerateInfo() {
         return generateInfo;
@@ -35,14 +37,15 @@ public class Map {
 
     public Map(int x){
        generateInfo = new GenerateInfo();
+       mapStatistics = new MapStatistics();
 
-        earth = new ArrayList<>();
+        ground = new ArrayList<>();
         for (int i = 0; i< x; i++){
             List<Cell> column = new ArrayList<>();
             for (int o = 0; o< x; o++){
                 column.add(new Cell(i, o, this));
             }
-            earth.add(column);
+            ground.add(column);
         }
 
         lastUpdated = new Date().getTime();
@@ -53,13 +56,13 @@ public class Map {
     }
 
     public synchronized Cell get(int x, int y){
-        return earth.get(x).get(y);
+        return ground.get(x).get(y);
     }
     public synchronized void set(int x, int y, Cell cell) {
-        earth.get(x).set(y, cell);
+        ground.get(x).set(y, cell);
     }
-    public List<List<Cell>> getEarth(){
-        return earth;
+    public List<List<Cell>> getGround(){
+        return ground;
     }
     public List<Cell> getNear(int x, int y){
 
@@ -68,7 +71,7 @@ public class Map {
         for(Directions direction :  Directions.values()){
 
             try{
-                out.add(earth.get(x+direction.x).get(y+direction.y));
+                out.add(ground.get(x+direction.x).get(y+direction.y));
 
             }catch (Exception e){
 
@@ -78,8 +81,8 @@ public class Map {
         return out;
     }
     public synchronized void action(){
-        int height = earth.size();
-        int width = earth.get(0).size();
+        int height = ground.size();
+        int width = ground.get(0).size();
 
         for(int i=0; i<height; i++){
             for(int o = 0; o<width; o++){
@@ -93,7 +96,7 @@ public class Map {
     public void generate_default(Game game){
 
 
-        int fields = mapToArray(earth).size();
+        int fields = mapToArray(ground).size();
 
         int part;
 
@@ -278,7 +281,7 @@ public class Map {
     public void set_things(Thing thing, int units){
 
         List<Cell> cells;
-        cells = mapToArray(earth);
+        cells = mapToArray(ground);
 
         int counter = 0;
 
@@ -334,5 +337,27 @@ public class Map {
         }
 
         return cells;
+    }
+
+    private void refreshStatistics(){
+        if(mapStatistics.game_over) return;
+        mapStatistics.turns++;
+
+        mapStatistics.clear();
+
+        List<Cell> list  = mapToArray(ground);
+        for (Cell c: list){
+            if(c.getThing()!=null){
+                if(c.getThing() instanceof Reducent) mapStatistics.reducent++;
+                if(c.getThing() instanceof Producent) mapStatistics.producent++;
+                if(c.getThing() instanceof Consument_1) mapStatistics.consument_1++;
+                if(c.getThing() instanceof Consument_2) mapStatistics.consument_2++;
+                if(c.getThing() instanceof Consument_3) mapStatistics.consument_3++;
+                if(c.getThing() instanceof Consument_4) mapStatistics.consument_4++;
+            }
+        }
+
+        mapStatistics.check();
+
     }
 }
