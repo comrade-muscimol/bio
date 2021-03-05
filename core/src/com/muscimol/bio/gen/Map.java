@@ -90,6 +90,20 @@ public class Map {
             }
         }
 
+
+        refreshStatistics();
+        System.out.println(
+                "game_over:"+mapStatistics.game_over+"\n"
+                        +"turns:"+mapStatistics.turns+"\n"
+                        +"r:"+mapStatistics.reducent+"\n"
+                        +"p:"+mapStatistics.producent+"\n"
+                        +"c_1:"+mapStatistics.consument_1+"\n"
+                        +"c_2:"+mapStatistics.consument_2+"\n"
+                        +"c_3:"+mapStatistics.consument_3+"\n"
+                        +"c_4:"+mapStatistics.consument_4+"\n"
+
+        );
+
         lastUpdated = new Date().getTime();
     }
 

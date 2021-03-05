@@ -1,8 +1,8 @@
 package com.muscimol.bio.creature;
 
 public enum Producents {
-    SMALL(2, "producent_1_cell"),
-    MIDDLE(3, "producent_2_cell"),
+    SMALL(1, "producent_1_cell"),
+    MIDDLE(2, "producent_2_cell"),
     BIG(4, "producent_3_cell");
 
     public int max_amount;

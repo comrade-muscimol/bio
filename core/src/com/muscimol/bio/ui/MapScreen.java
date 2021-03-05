@@ -4,7 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g3d.model.Node;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -17,7 +20,7 @@ import com.muscimol.bio.gen.Map;
 
 public class MapScreen implements Screen {
 
-    private static int MIN_CELL_SIZE = 1;
+    private static int MIN_CELL_SIZE = 5;
     private static int MAX_CELL_SIZE = 64;
 
     private Map map;
@@ -35,6 +38,7 @@ public class MapScreen implements Screen {
         if(cell_size>MIN_CELL_SIZE)cell_size--;
     }
 
+    private ShapeRenderer shapeRenderer;
     private Game game;
 
     private TextureAtlas atlas;
@@ -51,8 +55,11 @@ public class MapScreen implements Screen {
 
     @Override
     public void show() {
-        cell_size = 32;
-        stage = new Stage(new ExtendViewport(800, 600));
+        cell_size = 10;
+        stage = new Stage(new ExtendViewport(640, 480, 1920, 1080));
+
+
+
 
         atlas = new TextureAtlas(Gdx.files.internal("cells/map.atlas"));
         skin = new Skin(Gdx.files.internal("cells/map.json"), atlas);
@@ -75,6 +82,8 @@ public class MapScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 
         if(lastUpdated!=map.getLastUpdateTime()) {
             //System.out.println("before try:   x:"+map_scroll_percent_x+"-y:"+map_scroll_percent_y);
@@ -105,7 +114,7 @@ public class MapScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
