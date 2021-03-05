@@ -3,7 +3,7 @@ package com.muscimol.bio.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.muscimol.bio.generate.Map;
+import com.muscimol.bio.gen.Map;
 
 public class GenerationThread extends Thread {
     private Game game;

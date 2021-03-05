@@ -7,7 +7,7 @@ import com.muscimol.bio.creature.Consument_4;
 import com.muscimol.bio.creature.Producent;
 import com.muscimol.bio.creature.Reducent;
 import com.muscimol.bio.creature.Thing;
-import com.muscimol.bio.generate.Map;
+import com.muscimol.bio.gen.Map;
 
 import java.util.concurrent.ThreadLocalRandom;
 

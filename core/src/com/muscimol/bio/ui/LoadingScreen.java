@@ -18,8 +18,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import com.badlogic.gdx.graphics.Color;
-import com.muscimol.bio.generate.GeneratorDefaultSettings;
-import com.muscimol.bio.generate.Map;
+import com.muscimol.bio.gen.GeneratorDefaultSettings;
+import com.muscimol.bio.gen.Map;
 
 import java.util.Date;
 

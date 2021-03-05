@@ -1,4 +1,4 @@
-package com.muscimol.bio.generate;
+package com.muscimol.bio.gen;
 
 public enum States {
     READY,

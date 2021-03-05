@@ -1,8 +1,6 @@
 package com.muscimol.bio;
 
-import com.muscimol.bio.generate.Map;
-
-import java.util.Date;
+import com.muscimol.bio.gen.Map;
 
 public class Lifetime extends Thread {
 

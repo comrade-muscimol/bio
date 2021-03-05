@@ -2,6 +2,7 @@ package com.muscimol.bio.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -12,12 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.muscimol.bio.Lifetime;
-import com.muscimol.bio.generate.GeneratorDefaultSettings;
-import com.muscimol.bio.generate.Map;
-
-import java.util.concurrent.ThreadLocalRandom;
+import com.muscimol.bio.gen.Map;
 
 public class MapScreen implements Screen {
+
+    private static int MIN_CELL_SIZE = 1;
+    private static int MAX_CELL_SIZE = 64;
 
     private Map map;
 
@@ -26,7 +27,13 @@ public class MapScreen implements Screen {
 
     private long lastUpdated;
 
-    private int cell_size = 32;
+    private static int cell_size;
+    public static void zoomIn(){
+        if(cell_size<MAX_CELL_SIZE) cell_size++;
+    }
+    public static void zoomOut(){
+        if(cell_size>MIN_CELL_SIZE)cell_size--;
+    }
 
     private Game game;
 
@@ -44,6 +51,7 @@ public class MapScreen implements Screen {
 
     @Override
     public void show() {
+        cell_size = 32;
         stage = new Stage(new ExtendViewport(800, 600));
 
         atlas = new TextureAtlas(Gdx.files.internal("cells/map.atlas"));
@@ -55,7 +63,13 @@ public class MapScreen implements Screen {
             Lifetime.current.start();
         }
 
-        Gdx.input.setInputProcessor(stage);
+
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(stage);
+        inputMultiplexer.addProcessor(new MouseInput());
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
+
 
     }
 

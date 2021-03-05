@@ -1,8 +1,6 @@
 package com.muscimol.bio.ui;
 
 import com.badlogic.gdx.Game;
-import com.muscimol.bio.Lifetime;
-import com.muscimol.bio.generate.Map;
 
 public class MyGdxGame extends Game {
 

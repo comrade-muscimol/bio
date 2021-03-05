@@ -1,4 +1,4 @@
-package com.muscimol.bio.generate;
+package com.muscimol.bio.gen;
 
 import com.badlogic.gdx.Game;
 import com.muscimol.bio.Cell;
@@ -16,8 +16,6 @@ import com.muscimol.bio.creature.Producents;
 import com.muscimol.bio.creature.Reducent;
 import com.muscimol.bio.creature.Reducents;
 import com.muscimol.bio.creature.Thing;
-import com.muscimol.bio.ui.LoadingScreen;
-import com.muscimol.bio.ui.MapScreen;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,7 +85,7 @@ public class Map {
     public synchronized Cell get(int x, int y){
         return earth.get(x).get(y);
     }
-    public synchronized   void set(int x, int y, Cell cell) {
+    public synchronized void set(int x, int y, Cell cell) {
         earth.get(x).set(y, cell);
     }
     public List<List<Cell>> getEarth(){
@@ -123,7 +121,7 @@ public class Map {
     }
 
     public void generate_default(Game game){
-        System.out.println("начало стандартной генерации");
+
 
         int fields = mapToArray(earth).size();
 
@@ -304,7 +302,7 @@ public class Map {
             default:
                 System.err.println("default");
         }
-        System.out.println("окончание стандартной генерации");
+
     }
 
     public void set_things(Thing thing, int units){
@@ -349,13 +347,6 @@ public class Map {
 
             }
             cells.remove(0);
-
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
         }
 
     }

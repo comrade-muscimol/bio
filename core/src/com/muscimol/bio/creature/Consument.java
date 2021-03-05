@@ -1,7 +1,6 @@
 package com.muscimol.bio.creature;
 
 import com.muscimol.bio.Cell;
-import com.muscimol.bio.generate.Map;
 
 import java.util.ArrayList;
 import java.util.Collections;
