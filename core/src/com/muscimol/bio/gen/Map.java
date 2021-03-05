@@ -24,47 +24,17 @@ import java.util.List;
 
 public class Map {
 
-    public volatile int reducent_done;
-    public volatile int reducent_all;
-
-    public volatile int producent_done;
-    public volatile int producent_all;
-
-    public volatile int consument_1_done;
-    public volatile int consument_1_all;
-
-    public volatile int consument_2_done;
-    public volatile int consument_2_all;
-
-    public volatile int consument_3_done;
-    public volatile int consument_3_all;
-
-    public volatile int consument_4_done;
-    public volatile int consument_4_all;
-
-
     private long lastUpdated;
 
     private List<List<Cell>> earth;
+    private GenerateInfo generateInfo;
+
+    public GenerateInfo getGenerateInfo() {
+        return generateInfo;
+    }
 
     public Map(int x){
-        reducent_done = 0;
-        reducent_all = 0;
-
-        producent_done = 0;
-        producent_all = 0;
-
-        consument_1_done = 0;
-        consument_1_all = 0;
-
-        consument_2_done = 0;
-        consument_2_all = 0;
-
-        consument_3_done = 0;
-        consument_3_all = 0;
-
-        consument_4_done = 0;
-        consument_4_all = 0;
+       generateInfo = new GenerateInfo();
 
         earth = new ArrayList<>();
         for (int i = 0; i< x; i++){
@@ -127,22 +97,22 @@ public class Map {
 
         int part;
 
-        reducent_all = (int)(((double)fields/100)*GeneratorDefaultSettings.reducent_percent);
-        producent_all = (int)(((double)fields/100)*GeneratorDefaultSettings.producent_percent);
-        consument_1_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_1_percent);
-        consument_2_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_2_percent);
-        consument_3_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_3_percent);
-        consument_4_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_4_percent);
+        generateInfo.reducent_all = (int)(((double)fields/100)*GeneratorDefaultSettings.reducent_percent);
+        generateInfo.producent_all = (int)(((double)fields/100)*GeneratorDefaultSettings.producent_percent);
+        generateInfo.consument_1_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_1_percent);
+        generateInfo.consument_2_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_2_percent);
+        generateInfo.consument_3_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_3_percent);
+        generateInfo.consument_4_all = (int)(((double)fields/100)*GeneratorDefaultSettings.consument_4_percent);
 
         switch (GeneratorDefaultSettings.reducent_varieties){
             case 1:
-                set_things(Reducent.createRandom(), reducent_all);
+                set_things(Reducent.createRandom(), generateInfo.reducent_all);
                 break;
             case 2:
                 Reducent first;
                 Reducent second;
 
-                part = reducent_all/2;
+                part = generateInfo.reducent_all/2;
 
                 first = Reducent.createRandom();
 
@@ -154,7 +124,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = reducent_all/3;
+                part = generateInfo.reducent_all/3;
                 set_things(new Reducent(Reducents.SMALL.counts, Reducents.SMALL.image_atlas_name), part);
                 set_things(new Reducent(Reducents.MIDDLE.counts, Reducents.MIDDLE.image_atlas_name), part);
                 set_things(new Reducent(Reducents.BIG.counts, Reducents.BIG.image_atlas_name), part);
@@ -164,13 +134,13 @@ public class Map {
         }
         switch (GeneratorDefaultSettings.producent_varieties){
             case 1:
-                set_things(Producent.createRandom(), producent_all);
+                set_things(Producent.createRandom(), generateInfo.producent_all);
                 break;
             case 2:
                 Producent first;
                 Producent second;
 
-                part = producent_all/2;
+                part = generateInfo.producent_all/2;
 
                 first = Producent.createRandom();
 
@@ -182,7 +152,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = producent_all/3;
+                part = generateInfo.producent_all/3;
                 set_things(new Producent(Producents.SMALL.max_amount, Producents.SMALL.image_atlas_name), part);
                 set_things(new Producent(Producents.MIDDLE.max_amount, Producents.MIDDLE.image_atlas_name), part);
                 set_things(new Producent(Producents.BIG.max_amount, Producents.BIG.image_atlas_name), part);
@@ -192,13 +162,13 @@ public class Map {
         }
         switch (GeneratorDefaultSettings.consument_1_varieties){
             case 1:
-                set_things( Consument_1.createRandom(), consument_1_all);
+                set_things( Consument_1.createRandom(), generateInfo.consument_1_all);
                 break;
             case 2:
                 Consument_1 first;
                 Consument_1 second;
 
-                part = consument_1_all/2;
+                part = generateInfo.consument_1_all/2;
 
                 first = Consument_1.createRandom();
 
@@ -210,7 +180,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = consument_1_all/3;
+                part = generateInfo.consument_1_all/3;
                 set_things( Consument_1.createNew(Consuments_1.SMALL), part);
                 set_things(Consument_1.createNew(Consuments_1.MIDDLE), part);
                 set_things(Consument_1.createNew(Consuments_1.BIG), part);
@@ -220,13 +190,13 @@ public class Map {
         }
         switch (GeneratorDefaultSettings.consument_2_varieties){
             case 1:
-                set_things( Consument_2.createRandom(), consument_2_all);
+                set_things( Consument_2.createRandom(), generateInfo.consument_2_all);
                 break;
             case 2:
                 Consument_2 first;
                 Consument_2 second;
 
-                part = consument_2_all/2;
+                part = generateInfo.consument_2_all/2;
 
                 first = Consument_2.createRandom();
 
@@ -238,7 +208,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = consument_2_all/3;
+                part = generateInfo.consument_2_all/3;
                 set_things( Consument_2.createNew(Consuments_2.SMALL), part);
                 set_things(Consument_2.createNew(Consuments_2.MIDDLE), part);
                 set_things(Consument_2.createNew(Consuments_2.BIG), part);
@@ -248,13 +218,13 @@ public class Map {
         }
         switch (GeneratorDefaultSettings.consument_3_varieties){
             case 1:
-                set_things( Consument_3.createRandom(), consument_3_all);
+                set_things( Consument_3.createRandom(), generateInfo.consument_3_all);
                 break;
             case 2:
                 Consument_3 first;
                 Consument_3 second;
 
-                part = consument_3_all/2;
+                part = generateInfo.consument_3_all/2;
 
                 first = Consument_3.createRandom();
 
@@ -266,7 +236,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = consument_3_all/3;
+                part = generateInfo.consument_3_all/3;
                 set_things( Consument_3.createNew(Consuments_3.SMALL), part);
                 set_things(Consument_3.createNew(Consuments_3.MIDDLE), part);
                 set_things(Consument_3.createNew(Consuments_3.BIG), part);
@@ -276,13 +246,13 @@ public class Map {
         }
         switch (GeneratorDefaultSettings.consument_4_varieties){
             case 1:
-                set_things( Consument_4.createRandom(), consument_4_all);
+                set_things( Consument_4.createRandom(), generateInfo.consument_4_all);
                 break;
             case 2:
                 Consument_4 first;
                 Consument_4 second;
 
-                part = consument_4_all/2;
+                part = generateInfo.consument_4_all/2;
 
                 first = Consument_4.createRandom();
 
@@ -294,7 +264,7 @@ public class Map {
                 set_things(second, part);
                 break;
             case 3:
-                part = consument_4_all/3;
+                part = generateInfo.consument_4_all/3;
                 set_things( Consument_4.createNew(Consuments_4.SMALL), part);
                 set_things(Consument_4.createNew(Consuments_4.MIDDLE), part);
                 set_things(Consument_4.createNew(Consuments_4.BIG), part);
@@ -332,17 +302,17 @@ public class Map {
                 counter++;
 
                 if(thing instanceof Reducent){
-                    reducent_done++;
+                    generateInfo.reducent_done++;
                 }else if(thing instanceof Producent){
-                    producent_done++;
+                    generateInfo.producent_done++;
                 }else if(thing instanceof Consument_1){
-                    consument_1_done++;
+                    generateInfo.consument_1_done++;
                 }else if(thing instanceof Consument_2){
-                    consument_2_done++;
+                    generateInfo.consument_2_done++;
                 }else if(thing instanceof Consument_3){
-                    consument_3_done++;
+                    generateInfo.consument_3_done++;
                 }else if(thing instanceof Consument_4){
-                    consument_4_done++;
+                    generateInfo.consument_4_done++;
                 }
 
             }

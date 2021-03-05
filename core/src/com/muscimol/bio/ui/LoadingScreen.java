@@ -152,12 +152,12 @@ public class LoadingScreen implements Screen {
         Group consument_3_bar;
         Group consument_4_bar;
 
-        reducent_bar = generateBar(Type.REDUCENT, ((double)map.reducent_done/(double)map.reducent_all)*100, map.reducent_done, map.reducent_all);
-        producent_bar = generateBar(Type.PRODUCENT, ((double)map.producent_done/(double)map.producent_all)*100, map.producent_done, map.producent_all);
-        consument_1_bar = generateBar(Type.CONSUMENT_1, ((double)map.consument_1_done/(double)map.consument_1_all)*100, map.consument_1_done, map.consument_1_all);
-        consument_2_bar = generateBar(Type.CONSUMENT_2, ((double)map.consument_2_done/(double)map.consument_2_all)*100, map.consument_2_done, map.consument_2_all);
-        consument_3_bar = generateBar(Type.CONSUMENT_3, ((double)map.consument_3_done/(double)map.consument_3_all)*100, map.consument_3_done, map.consument_3_all);
-        consument_4_bar = generateBar(Type.CONSUMENT_4, ((double)map.consument_4_done/(double)map.consument_4_all)*100, map.consument_4_done, map.consument_4_all);
+        reducent_bar = generateBar(Type.REDUCENT, ((double)map.getGenerateInfo().reducent_done/(double)map.getGenerateInfo().reducent_all)*100, map.getGenerateInfo().reducent_done, map.getGenerateInfo().reducent_all);
+        producent_bar = generateBar(Type.PRODUCENT, ((double)map.getGenerateInfo().producent_done/(double)map.getGenerateInfo().producent_all)*100, map.getGenerateInfo().producent_done, map.getGenerateInfo().producent_all);
+        consument_1_bar = generateBar(Type.CONSUMENT_1, ((double)map.getGenerateInfo().consument_1_done/(double)map.getGenerateInfo().consument_1_all)*100, map.getGenerateInfo().consument_1_done, map.getGenerateInfo().consument_1_all);
+        consument_2_bar = generateBar(Type.CONSUMENT_2, ((double)map.getGenerateInfo().consument_2_done/(double)map.getGenerateInfo().consument_2_all)*100, map.getGenerateInfo().consument_2_done, map.getGenerateInfo().consument_2_all);
+        consument_3_bar = generateBar(Type.CONSUMENT_3, ((double)map.getGenerateInfo().consument_3_done/(double)map.getGenerateInfo().consument_3_all)*100, map.getGenerateInfo().consument_3_done, map.getGenerateInfo().consument_3_all);
+        consument_4_bar = generateBar(Type.CONSUMENT_4, ((double)map.getGenerateInfo().consument_4_done/(double)map.getGenerateInfo().consument_4_all)*100, map.getGenerateInfo().consument_4_done, map.getGenerateInfo().consument_4_all);
 
         consument_4_bar.setPosition(x, 0);
         consument_3_bar.setPosition(x, (height*1)+(padding*1));
